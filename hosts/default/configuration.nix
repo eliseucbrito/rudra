@@ -165,9 +165,7 @@ environment.systemPackages = with pkgs; [
   # Text editors and IDEs
   vim neovim vscode 
   
-    # jetbrains.idea-community-bin
-  
-    # Zen Browser from custom input
+# Zen Browser from custom input
   inputs.zen-browser.packages."${system}".default
 
   # Programming languages and tools
@@ -185,7 +183,7 @@ environment.systemPackages = with pkgs; [
   unzip
 
   # System monitoring and management
-#   htop btop lm_sensors inxi auto-cpufreq nvtopPackages.nvidia
+  htop btop lm_sensors inxi auto-cpufreq nvtopPackages.nvidia
 
   # Network and internet tools
   aria2 qbittorrent
