@@ -5,7 +5,7 @@ let
   userDescription = "Eliseu Brito";
   homeDirectory = "/home/${username}";
   hostName = "rudra";
-  timeZone = "Ameria/Recife";
+  timeZone = "America/Recife";
 in
 {
   imports =
