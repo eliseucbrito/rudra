@@ -157,11 +157,7 @@ in
     };
   };
 
-services.pam.gnomeKeyring.enable = true;
-
 environment.systemPackages = with pkgs; [
-  gnomeKeyring hyprland libhyprland
-
   # Text editors and IDEs
   vim neovim vscode 
   
