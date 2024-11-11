@@ -159,9 +159,9 @@ in
 
 environment.systemPackages = with pkgs; [
   # Text editors and IDEs
-  vim neovim vscode 
+  vim neovim vscode postman  
   
-# Zen Browser from custom input
+	# Zen Browser from custom input
   inputs.zen-browser.packages."${system}".default
 
   # Programming languages and tools
