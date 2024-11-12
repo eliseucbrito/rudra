@@ -161,7 +161,7 @@ environment.systemPackages = with pkgs; [
   # Text editors and IDEs
   vim neovim vscode postman  
   
-	# Zen Browser from custom input
+  # Zen Browser from custom input
   inputs.zen-browser.packages."${system}".default
 
   # Programming languages and tools
@@ -250,6 +250,14 @@ environment.systemPackages = with pkgs; [
   };
 
   services = {
+    libinput = {
+      enable = true;
+
+      touchpad = {
+	naturalScrolling = true; 
+        additionalOptions = ''MatchIsTouchpad "on"'';
+      };
+    };
     xserver = {
       enable = false;
       xkb = {
@@ -276,7 +284,6 @@ environment.systemPackages = with pkgs; [
     cron = {
       enable=true;
     };
-    libinput.enable = true;
     fstrim.enable = true;
     gvfs.enable = true;
     openssh.enable = true;

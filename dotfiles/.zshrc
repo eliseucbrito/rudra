@@ -71,7 +71,6 @@ alias cat='bat'
 alias c='clear' # clear terminal
 alias e='exit'
 alias mkdir='mkdir -p'
-alias vim='nixCats'
 alias grep='rg --color=auto'
 alias ssn='sudo shutdown now'
 alias srn='sudo reboot now'
@@ -145,3 +144,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Turso
 export PATH="$PATH:/home/vasu/.turso"
+
+## ECB keybinds
+
+alias zk="nvim ~/home/rudra/dotfiles/.zshrc"
+alias hk="nvim ~/home/rudra/dotfiles/.config/hypr/keybindings.conf "
