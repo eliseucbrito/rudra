@@ -159,7 +159,7 @@ in
 
 environment.systemPackages = with pkgs; [
   # Text editors and IDEs
-  vim neovim vscode postman  
+  vim neovim vscode bruno 
   
   # Zen Browser from custom input
   inputs.zen-browser.packages."${system}".default
@@ -259,11 +259,11 @@ environment.systemPackages = with pkgs; [
       };
     };
     xserver = {
-      enable = false;
+      enable = true;
       xkb = {
-        layout = "us";
-        variant = "";
-      };
+		layout = "us";
+		variant = "intl";
+       };
     };
     greetd = {
       enable = true;
