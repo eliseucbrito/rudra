@@ -176,7 +176,7 @@ environment.systemPackages = with pkgs; [
   stow wget eza starship kitty zoxide fzf progress tree
 
   # File management and archives
-  unzip
+  unzip ranger
 
   # System monitoring and management
   htop btop lm_sensors inxi auto-cpufreq nvtopPackages.nvidia
@@ -191,7 +191,7 @@ environment.systemPackages = with pkgs; [
   hyprpicker swww hyprlock
 
   # Productivity and office
-  obsidian spacedrive
+  obsidian spacedrive vesktop
 
   # Browsers
   firefox google-chrome
