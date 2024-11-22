@@ -8,6 +8,7 @@ let
   timeZone = "America/Recife";
 in
 {
+
   imports =
     [
       ./hardware-configuration.nix
@@ -16,6 +17,7 @@ in
       ../../modules/nvidia-prime-drivers.nix
       ../../modules/intel-drivers.nix
       inputs.home-manager.nixosModules.default
+      # inputs.hyprlux.nixosModules.default
     ];
 
   boot = {
@@ -138,9 +140,11 @@ in
       enable = true;
       package = pkgs.nix-ld-rs;
     };
+
     firefox.enable = false;
     dconf.enable = true;
     fuse.userAllowOther = true;
+
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -157,9 +161,12 @@ in
     };
   };
 
+
 environment.systemPackages = with pkgs; [
   # Text editors and IDEs
-  vim neovim vscode bruno 
+  vim neovim vscode bruno dbeaver-bin 
+
+  jetbrains.idea-ultimate
   
   # Zen Browser from custom input
   inputs.zen-browser.packages."${system}".default
@@ -167,15 +174,15 @@ environment.systemPackages = with pkgs; [
   # Programming languages and tools
   go lua python3 python3Packages.pip uv
   nodePackages_latest.pnpm nodePackages_latest.yarn nodePackages_latest.nodejs
-  bun jdk maven gcc 
+  bun jdk maven gcc jdk8
 
   # Version control and development tools
-  git gh
+  git gh oxker
+
 
   # Shell and terminal utilities
   stow wget eza starship kitty zoxide fzf progress tree
 
-  # File management and archives
   unzip ranger
 
   # System monitoring and management

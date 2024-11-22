@@ -1,7 +1,7 @@
 [init]
 	defaultBranch = main
 [user]
-	email = vasujain275@gmail.com
-	name = vasujain275
+	email = ecb2@cin.ufpe.br
+	name = eliseucbrito
 [pull]
 	rebase = true
