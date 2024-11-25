@@ -132,6 +132,7 @@ in
   virtualisation = {
     docker = {
       enable = true;
+      liveRestore = false;
     };
   };
 
@@ -161,7 +162,6 @@ in
     };
   };
 
-
 environment.systemPackages = with pkgs; [
   # Text editors and IDEs
   vim neovim vscode bruno dbeaver-bin 
@@ -176,12 +176,13 @@ environment.systemPackages = with pkgs; [
   nodePackages_latest.pnpm nodePackages_latest.yarn nodePackages_latest.nodejs
   bun jdk maven gcc jdk8
 
+
   # Version control and development tools
   git gh oxker
 
 
   # Shell and terminal utilities
-  stow wget eza starship kitty zoxide fzf progress tree
+  stow wget eza starship kitty zoxide fzf progress tree warp-terminal
 
   unzip ranger
 
