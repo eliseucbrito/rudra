@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  userName = "cincoders";
+  userName = "cincoders-dash";
   homeDirectory = "/home/${userName}";
   stateVersion = "24.05";
 in

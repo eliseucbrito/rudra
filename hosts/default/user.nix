@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 let
-  userName = "cincoders";
+  userName = "cincoders-dash";
   userDescription = "CinCoders";
 in
 {

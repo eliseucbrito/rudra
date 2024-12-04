@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, options, ... }:
 
 let
-  username = "cincoders";
+  username = "cincoders-dash";
   userDescription = "CinCoders";
   homeDirectory = "/home/${username}";
   hostName = "cincoders-dash";
