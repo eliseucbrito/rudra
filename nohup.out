@@ -1,0 +1,28 @@
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Could not find config in HOME, XDG_CONFIG_HOME, XDG_CONFIG_DIRS or /etc/hypr.
+[LOG] Welcome to hyprpaper!
+built from commit v0.7.1 ()
+[LOG] Preloaded target /home/ecb/rudra/config/assets/wall.png in 294.90ms -> Pixel size: [3840, 2160]
+[LOG] Buffer created for target /home/ecb/rudra/config/assets/wall.png, Shared Memory usage: 8.3MB
+[LOG] Total SM usage for all buffers: 8.3MB
+[LOG] hyprpaper socket started at /run/user/1000/hypr/4520b30d498daca8079365bdb909a8dea38e8d55_1732882781_1599312861/.hyprpaper.sock (fd: 4)
+[LOG] configure for eDP-1
+[LOG] handlePreferredScale: 1.00 for 252b0570
+[LOG] configure for eDP-1
+[LOG] configure for HDMI-A-1
+[LOG] handlePreferredScale: 1.00 for 252b87a0
+[LOG] configure for HDMI-A-1
+[LOG] Image data for eDP-1: /home/ecb/rudra/config/assets/wall.png at [-0.00, 0.00], scale: 0.50 (original image size: [3840, 2160])
+[LOG] Submitting viewport dest size 1920x1080 for 252b0570
+[LOG] Image data for HDMI-A-1: /home/ecb/rudra/config/assets/wall.png at [-0.00, 0.00], scale: 0.50 (original image size: [3840, 2160])
+[LOG] Submitting viewport dest size 1920x1080 for 252b87a0
+[LOG] handlePreferredScale: 1.00 for 252b0570
+[LOG] handlePreferredScale: 1.00 for 252b87a0
+[LOG] Destroying output HDMI-A-1
+[LOG] configure for HDMI-A-1
+[LOG] handlePreferredScale: 1.00 for 252adec0
+[LOG] configure for HDMI-A-1
+[LOG] Image data for HDMI-A-1: /home/ecb/rudra/config/assets/wall.png at [-0.00, 0.00], scale: 0.50 (original image size: [3840, 2160])
+[LOG] Submitting viewport dest size 1920x1080 for 252adec0
+[LOG] handlePreferredScale: 1.00 for 252adec0
+[LOG] Destroying output HDMI-A-1

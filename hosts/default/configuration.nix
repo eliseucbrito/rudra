@@ -1,10 +1,10 @@
 { config, lib, pkgs, inputs, options, ... }:
 
 let
-  username = "ecb";
-  userDescription = "Eliseu Brito";
+  username = "cincoders";
+  userDescription = "CinCoders";
   homeDirectory = "/home/${username}";
-  hostName = "rudra";
+  hostName = "cincoders-dash";
   timeZone = "America/Recife";
 in
 {
@@ -17,7 +17,6 @@ in
       ../../modules/nvidia-prime-drivers.nix
       ../../modules/intel-drivers.nix
       inputs.home-manager.nixosModules.default
-      # inputs.hyprlux.nixosModules.default
     ];
 
   boot = {
@@ -61,6 +60,8 @@ in
     firewall = {
       allowedTCPPortRanges = [ { from = 8060; to = 8090; } ];
       allowedUDPPortRanges = [ { from = 8060; to = 8090; } ];
+	  allowedTCPPorts = [ 3389 5900 22 ]; # Adicionando portas RDP (3389), VNC (5900), e SSH (22)
+      allowedUDPPorts = [ 3389 5900 ];    # Se necessário para RDP/VNC
     };
   };
 
@@ -129,23 +130,14 @@ in
     };
   };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      liveRestore = false;
-    };
-  };
-
   programs = {
     nix-ld = {
       enable = true;
       package = pkgs.nix-ld-rs;
     };
 
-    firefox.enable = false;
     dconf.enable = true;
     fuse.userAllowOther = true;
-
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -163,49 +155,23 @@ in
   };
 
 environment.systemPackages = with pkgs; [
-  # Text editors and IDEs
-  vim neovim vscode bruno dbeaver-bin 
+  vim vscode remmina
 
-  jetbrains.idea-ultimate
-  
-  # Zen Browser from custom input
-  inputs.zen-browser.packages."${system}".default
+  cinnamon.nemo-with-extensions
 
-  # Programming languages and tools
-  go lua python3 python3Packages.pip uv
-  nodePackages_latest.pnpm nodePackages_latest.yarn nodePackages_latest.nodejs
-  bun jdk maven gcc jdk8
+  oxker
 
-
-  # Version control and development tools
-  git gh oxker
-
-
-  # Shell and terminal utilities
-  stow wget eza starship kitty zoxide fzf progress tree warp-terminal
+  stow wget eza starship kitty zoxide fzf progress tree
 
   unzip ranger
 
-  # System monitoring and management
-  htop btop lm_sensors inxi auto-cpufreq nvtopPackages.nvidia
+  btop lm_sensors s-tui inxi grafterm
 
-  # Network and internet tools
-  aria2 qbittorrent
+  pulseaudio pavucontrol ffmpeg mpv deadbeef-with-plugins
 
-  # Audio and video
-  pulseaudio ffmpeg
+  hyprpicker swww hyprlock hyprpaper
 
-  # Image and graphics
-  hyprpicker swww hyprlock
-
-  # Productivity and office
-  obsidian spacedrive vesktop
-
-  # Browsers
-  firefox google-chrome
-
-  # Gaming and entertainment
-  stremio
+  google-chrome
 
   # System utilities
   libgcc bc kdePackages.dolphin lxqt.lxqt-policykit libnotify v4l-utils ydotool
@@ -218,17 +184,11 @@ environment.systemPackages = with pkgs; [
   # File systems
   ntfs3g os-prober
 
-  # Clipboard managers
-  cliphist
-
   # Fun and customization
-#   cmatrix lolcat fastfetch onefetch microfetch
+  fortune lolcat fastfetch onefetch microfetch
 
   # Networking
   networkmanagerapplet
-
-  # Music and streaming
-  youtube-music spotify
 
   # Miscellaneous
   greetd.tuigreet

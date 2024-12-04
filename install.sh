@@ -2,7 +2,7 @@
 
 # Define variables for directories and files
 USER_HOME=$(eval echo ~$SUDO_USER)
-RUDRA_DIR="$USER_HOME/rudra"
+RUDRA_DIR="$USER_HOME/tvcin"
 
 # Run nixos-generate-config command
 sudo nixos-generate-config --show-hardware-config > "$RUDRA_DIR/hosts/default/hardware-configuration.nix" || { echo "Failed to generate hardware configuration"; exit 1; }
