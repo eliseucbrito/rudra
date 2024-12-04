@@ -149,13 +149,12 @@ in
       description = userDescription;
       extraGroups = [ "networkmanager" "wheel" ];
       packages = with pkgs; [
-        firefox
       ];
     };
   };
 
 environment.systemPackages = with pkgs; [
-  vim vscode remmina
+  vim vscode git 
 
   cinnamon.nemo-with-extensions
 
@@ -174,7 +173,7 @@ environment.systemPackages = with pkgs; [
   google-chrome
 
   # System utilities
-  libgcc bc kdePackages.dolphin lxqt.lxqt-policykit libnotify v4l-utils ydotool
+  libgcc bc lxqt.lxqt-policykit libnotify v4l-utils ydotool
   pciutils socat cowsay ripgrep lshw bat pkg-config brightnessctl virt-viewer
   swappy appimage-run yad playerctl nh ansible
 
