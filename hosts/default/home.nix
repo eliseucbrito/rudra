@@ -87,15 +87,15 @@ in
         lock_cmd = "hyprlock";
       };
       listener = [
-        {
-          timeout = 86400;
-          on-timeout = "hyprlock";
-        }
-        {
-          timeout = 86400;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
+        # {
+        #   timeout = 86400;
+        #   on-timeout = "hyprlock";
+        # }
+        # {
+        #   timeout = 86400;
+        #   on-timeout = "hyprctl dispatch dpms off";
+        #   on-resume = "hyprctl dispatch dpms on";
+        # }
       ];
     };
   };
