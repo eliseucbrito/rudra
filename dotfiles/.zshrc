@@ -145,7 +145,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Turso
 export PATH="$PATH:/home/vasu/.turso"
 
-## ECB keybinds
-
-alias zk="nvim ~/home/rudra/dotfiles/.zshrc"
+alias zrc="nvim ~/home/rudra/dotfiles/.zshrc"
 alias hk="nvim ~/home/rudra/dotfiles/.config/hypr/keybindings.conf "
+alias hc="nvim ~/home/rudra/dotfiles/.config/hypr/hyprland.conf "
+alias home="nvim ~/home/rudra/hosts/default/home.nix"
+alias cfg="nvim ~/home/rudra/hosts/default/configuration.nix"

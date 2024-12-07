@@ -166,6 +166,10 @@ environment.systemPackages = with pkgs; [
   # Text editors and IDEs
   vim neovim vscode bruno dbeaver-bin 
 
+  neofetch
+
+  cinnamon.nemo-with-extensions
+
   jetbrains.idea-ultimate
   
   # Zen Browser from custom input
@@ -174,7 +178,7 @@ environment.systemPackages = with pkgs; [
   # Programming languages and tools
   go lua python3 python3Packages.pip uv
   nodePackages_latest.pnpm nodePackages_latest.yarn nodePackages_latest.nodejs
-  bun jdk maven gcc jdk8
+  bun jdk maven gcc jdk8 cargo
 
 
   # Version control and development tools
@@ -182,7 +186,7 @@ environment.systemPackages = with pkgs; [
 
 
   # Shell and terminal utilities
-  stow wget eza starship kitty zoxide fzf progress tree warp-terminal
+  wtf openssl stow wget eza starship kitty zoxide fzf progress tree warp-terminal
 
   unzip ranger
 
@@ -193,10 +197,10 @@ environment.systemPackages = with pkgs; [
   aria2 qbittorrent
 
   # Audio and video
-  pulseaudio ffmpeg
+  pulseaudio pavucontrol ffmpeg mpv deadbeef-with-plugins
 
   # Image and graphics
-  hyprpicker swww hyprlock
+  hyprpicker swww hyprlock hyprpaper
 
   # Productivity and office
   obsidian spacedrive vesktop

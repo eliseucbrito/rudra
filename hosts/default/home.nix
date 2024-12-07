@@ -9,7 +9,7 @@ in
   home = {
     username = userName;
     homeDirectory = homeDirectory;
-    stateVersion = stateVersion; # Please read the comment before changing.
+    stateVersion = stateVersion;
 
     file = {
       # Hyprland Config
@@ -24,8 +24,7 @@ in
       ".xinitrc".source = ../../dotfiles/.xinitrc;
       ".gitconfig".source = ../../dotfiles/.gitconfig;
       ".ideavimrc".source = ../../dotfiles/.ideavimrc;
-      ".nirc".source = ../../dotfiles/.nirc;
-      ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
+      ".nirc".source = ../../dotfiles/.nirc; ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
       
       # Config directories
       ".config/alacritty".source = ../../dotfiles/.config/alacritty;
@@ -44,32 +43,14 @@ in
       ".config/mimeapps.list".source = ../../dotfiles/.config/mimeapps.list;
     };
 
-    # sessionVariables = {
-    #   EDITOR = "nixCats";
-    #   VISUAL = "nixCats";
-    #   TERMINAL = "kitty";
-    #   BROWSER = "firefox";
-    #   XDG_CONFIG_HOME = "$HOME/.config";
-    #   XDG_DATA_HOME = "$HOME/.local/share";
-    #   XDG_STATE_HOME = "$HOME/.local/state";
-    #   XDG_CACHE_HOME = "$HOME/.cache";
-    #   XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
-    #   JAVA_AWT_WM_NONREPARENTING = "1";
-    #   XDG_SESSION_TYPE = "wayland";
-    #   XDG_CURRENT_DESKTOP = "Hyprland";
-    #   XDG_SESSION_DESKTOP = "Hyprland";
-    #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    #   GBM_BACKEND = "nvidia-drm";
-    #   LC_ALL = "en_US.UTF-8";
-    # };
+    packages = [ 
+      pkgs.mpv
+      (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
+    ];
 
     sessionPath = [
       "$HOME/.local/bin"
       "$HOME/go/bin"
-    ];
-
-    packages = [
-      (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
     ];
   };
 
@@ -121,3 +102,4 @@ in
 
   programs.home-manager.enable = true;
 }
+

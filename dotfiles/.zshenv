@@ -2,7 +2,7 @@
 export EDITOR="nixCats"
 export VISUAL="nixCats"
 export TERMINAL="kitty"
-export BROWSER="firefox"
+export BROWSER="zen"
 
 # default folders
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -22,3 +22,4 @@ export GBM_BACKEND=nvidia-drm
 
 # set the localization
 export LC_ALL=en_US.UTF-8
+
