@@ -235,14 +235,6 @@ environment.systemPackages = with pkgs; [
        };
     };
 
-    vncserver = {
-      enable = true;
-      # Configurar um usuário específico e a resolução desejada
-      users = [ "cincoders-dash" ];
-      display = 1; # Isso configura o servidor VNC para rodar em :1
-      geometry = "1920x1080";
-      depth = 24;
-    };
 
     greetd = {
       enable = true;
