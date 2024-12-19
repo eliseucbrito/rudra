@@ -150,3 +150,5 @@ alias hk="nvim ~/home/rudra/dotfiles/.config/hypr/keybindings.conf "
 alias hc="nvim ~/home/rudra/dotfiles/.config/hypr/hyprland.conf "
 alias home="nvim ~/home/rudra/hosts/default/home.nix"
 alias cfg="nvim ~/home/rudra/hosts/default/configuration.nix"
+
+alias build="sudo nixos-rebuild switch --keep-going --flake .#default && hyprctl reload"
