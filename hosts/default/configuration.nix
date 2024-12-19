@@ -60,8 +60,9 @@ in
     firewall = {
       allowedTCPPortRanges = [ { from = 8060; to = 8090; } ];
       allowedUDPPortRanges = [ { from = 8060; to = 8090; } ];
-	  allowedTCPPorts = [ 3389 5900 22 ]; # Adicionando portas RDP (3389), VNC (5900), e SSH (22)
-      allowedUDPPorts = [ 3389 5900 ];    # Se necessário para RDP/VNC
+
+      allowedTCPPorts = [ 3389 5901 22 ]; # 5901 para TigerVNC (display :1), 3389 para RDP, 22 para SSH
+      allowedUDPPorts = [ 3389 5901 ];    # Se necessário para VNC/RDP
     };
   };
 
@@ -154,6 +155,7 @@ in
   };
 
 environment.systemPackages = with pkgs; [
+  tigervnc xterm
   vim vscode git 
 
   cinnamon.nemo-with-extensions
@@ -232,6 +234,16 @@ environment.systemPackages = with pkgs; [
 		variant = "intl";
        };
     };
+
+    vncserver = {
+      enable = true;
+      # Configurar um usuário específico e a resolução desejada
+      users = [ "cincoders-dash" ];
+      display = 1; # Isso configura o servidor VNC para rodar em :1
+      geometry = "1920x1080";
+      depth = 24;
+    };
+
     greetd = {
       enable = true;
       vt = 3;
