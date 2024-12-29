@@ -1,2 +1,65 @@
-set clipboard+=unnamed
-set relativenumber
+" Neo-tree
+nnoremap <leader>E :Neotree toggle buffers<CR>
+
+" Telescope
+nnoremap <C-p> :Telescope find_files<CR>
+nnoremap <leader>fw :Telescope live_grep<CR>
+nnoremap <leader>fa :Telescope live_grep_args<CR>
+
+" Transparent
+nnoremap <leader>uT :TransparentEnable<CR>
+nnoremap <leader>ut :TransparentToggle<CR>
+
+" mini.nvim
+" Não há suporte direto para funções Lua no IdeaVim, então você terá que configurar isso manualmente no IntelliJ.
+
+" Utilities
+nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+nnoremap tn :tabnew<CR>
+nnoremap <leader>n :noh<CR>
+
+" Centering screen
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Visual mode
+vnoremap p "_dP
+vnoremap < <gv
+vnoremap > >gv
+
+" Moving lines
+xnoremap J :m '>+1<CR>gv=gv
+xnoremap K :m '<-2<CR>gv=gv
+
+" User configs
+nnoremap <Tab> :BufferLineCycleNext<CR>
+nnoremap <S-Tab> :BufferLineCyclePrev<CR>
+nnoremap <M-1> :ToggleTerm<CR>
+
+" Copy and Paste with Shift+P and y
+vnoremap P "+p
+vnoremap Y "+y
+nnoremap P "+p
+nnoremap Y "+y
+
+" Abrir a lista de arquivos recentes com espaço duas vezes
+nnoremap <Space><Space> :action RecentFiles<CR>
+
+" TAB para mudar para a próxima aba
+nnoremap <Tab> :action NextTab<CR>
+
+" SHIFT + TAB para mudar para a aba anterior
+nnoremap <S-Tab> :action PreviousTab<CR>
+
+
+" Mapear gcc para comentar as linhas selecionadas
+xnoremap gcc :action CommentByLineComment<CR>
+nnoremap gcc :action CommentByLineComment<CR>
+
+
+" Mapear um comando para dividir a tela verticalmente
+nnoremap <leader>v :action SplitVertically<CR>
+
+nnoremap <leader>c :action CloseActiveTab<CR>

@@ -12,7 +12,7 @@
 
 	"modules-left": ["custom/left","custom/rofi","backlight","pulseaudio","battery","custom/right"],
 	"modules-center": ["custom/left","hyprland/workspaces","custom/right"],
-	"modules-right": ["custom/left","tray","clock","custom/right"],
+	"modules-right": ["custom/left", "custom/gnma", "tray","clock","custom/right"],
 
  
    "network": {
@@ -33,13 +33,23 @@
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     // "critical-threshold": 80,
     // "format-critical": "{temperatureC}°C ",
-    "format": "{temperatureC}°C "
+	"format": "{temperatureC}°C "
     },
 
      "custom/rofi": {
         "format": "  {}",
         "on-click": "rofi -show drun"
 	},
+
+    "custom/gnma": {
+        "format": " {} ",
+        "interval": 5,
+        "exec": "gnome-next-meeting-applet dbus get_event",
+        "exec-if": "pgrep -f gnome-next-meeting-applet",
+        "max-length": 50,
+        "min-length": 1,
+        "on-click": "gnome-next-meeting-applet dbus open_event_url",
+    },
 
     "hyprland/workspaces": {
         "disable-scroll": true,

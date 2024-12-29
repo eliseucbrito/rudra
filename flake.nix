@@ -11,13 +11,14 @@
     # zen-browser.url = "github:MarceColl/zen-browser-flake";
     # update of Out/2024
     zen-browser.url = "github:eliseucbrito/zen-browser-flake";
+    nixvim.url = "github:daniloraisi/nixvim";
 
     hyprlux = {
       url = "github:amadejkastelic/Hyprlux";
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, nixvim, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [

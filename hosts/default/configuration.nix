@@ -59,9 +59,11 @@ in
     networkmanager.enable = true;
     timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
     firewall = {
-      allowedTCPPortRanges = [ { from = 8060; to = 8090; } ];
-      allowedUDPPortRanges = [ { from = 8060; to = 8090; } ];
-    };
+   	allowedTCPPorts = [ 3131 ];
+	allowedUDPPorts = [ 3131 ];
+	allowedTCPPortRanges = [ { from = 8060; to = 8090; } ];
+	allowedUDPPortRanges = [ { from = 8060; to = 8090; } ];
+     };
   };
 
   time.timeZone = timeZone;
@@ -136,6 +138,15 @@ in
     };
   };
 
+
+programs.virt-manager.enable = true;
+
+users.groups.libvirtd.members = ["ecb"];
+
+virtualisation.libvirtd.enable = true;
+
+virtualisation.spiceUSBRedirection.enable = true;
+
   programs = {
     nix-ld = {
       enable = true;
@@ -162,15 +173,26 @@ in
     };
   };
 
+programs.adb.enable = true;
+
 environment.systemPackages = with pkgs; [
   # Text editors and IDEs
-  vim neovim vscode bruno dbeaver-bin 
+  vim vscode bruno dbeaver-bin 
+  inputs.nixvim.packages.x86_64-linux.default
+
+  deskreen
+  gparted
+  rclone
+
+  vivaldi
 
   neofetch
 
+  ente-auth
+
   cinnamon.nemo-with-extensions
 
-  jetbrains.idea-ultimate
+  jetbrains.idea-ultimate postman
   
   # Zen Browser from custom input
   inputs.zen-browser.packages."${system}".default
@@ -283,7 +305,7 @@ environment.systemPackages = with pkgs; [
       settings = {
         default_session = {
           user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
         };
       };
     };

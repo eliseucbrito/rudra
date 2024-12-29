@@ -145,8 +145,15 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Turso
 export PATH="$PATH:/home/vasu/.turso"
 
-alias zrc="nvim ~/home/rudra/dotfiles/.zshrc"
-alias hk="nvim ~/home/rudra/dotfiles/.config/hypr/keybindings.conf "
-alias hc="nvim ~/home/rudra/dotfiles/.config/hypr/hyprland.conf "
-alias home="nvim ~/home/rudra/hosts/default/home.nix"
-alias cfg="nvim ~/home/rudra/hosts/default/configuration.nix"
+alias zrc="nvim ~/rudra/dotfiles/.zshrc"
+alias hk="nvim ~/rudra/dotfiles/.config/hypr/keybindings.conf "
+alias hc="nvim ~/rudra/dotfiles/.config/hypr/hyprland.conf "
+alias home="nvim ~/rudra/hosts/default/home.nix"
+alias cfg="nvim ~/rudra/hosts/default/configuration.nix"
+
+alias build="cd ~/rudra && sudo nixos-rebuild switch --flake .#default"
+
+## Keybinds
+
+alias nr="npm run"
+alias dc="docker compose"
