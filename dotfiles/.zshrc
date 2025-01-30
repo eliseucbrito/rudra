@@ -157,3 +157,4 @@ alias build="cd ~/rudra && sudo nixos-rebuild switch --flake .#default"
 
 alias nr="npm run"
 alias dc="docker compose"
+alias fs="df -BG /home | aws 'NR==2 {print $4}"

@@ -1,29 +1,31 @@
-{ config, lib, pkgs, inputs, options, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  options,
+  ...
+}: let
   username = "ecb";
   userDescription = "Eliseu Brito";
   homeDirectory = "/home/${username}";
   hostName = "rudra";
   timeZone = "America/Recife";
-in
-{
-
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./user.nix
-      ../../modules/nvidia-drivers.nix
-      ../../modules/nvidia-prime-drivers.nix
-      ../../modules/intel-drivers.nix
-      inputs.home-manager.nixosModules.default
-      # inputs.hyprlux.nixosModules.default
-    ];
+in {
+  imports = [
+    ./hardware-configuration.nix
+    ./user.nix
+    ../../modules/nvidia-drivers.nix
+    ../../modules/nvidia-prime-drivers.nix
+    ../../modules/intel-drivers.nix
+    inputs.home-manager.nixosModules.default
+    # inputs.hyprlux.nixosModules.default
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = [ "v4l2loopback" ];
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    kernelModules = ["v4l2loopback"];
+    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
     kernel.sysctl = {
       "vm.max_map_count" = 2147483642;
     };
@@ -57,13 +59,23 @@ in
   networking = {
     hostName = hostName;
     networkmanager.enable = true;
-    timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
+    timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
     firewall = {
-   	allowedTCPPorts = [ 3131 ];
-	allowedUDPPorts = [ 3131 ];
-	allowedTCPPortRanges = [ { from = 8060; to = 8090; } ];
-	allowedUDPPortRanges = [ { from = 8060; to = 8090; } ];
-     };
+      allowedTCPPorts = [3131];
+      allowedUDPPorts = [3131];
+      allowedTCPPortRanges = [
+        {
+          from = 8060;
+          to = 8090;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 8060;
+          to = 8090;
+        }
+      ];
+    };
   };
 
   time.timeZone = timeZone;
@@ -111,7 +123,7 @@ in
     cursor.size = 24;
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
@@ -138,14 +150,13 @@ in
     };
   };
 
+  programs.virt-manager.enable = true;
 
-programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["ecb"];
 
-users.groups.libvirtd.members = ["ecb"];
+  virtualisation.libvirtd.enable = true;
 
-virtualisation.libvirtd.enable = true;
-
-virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   programs = {
     nix-ld = {
@@ -156,7 +167,6 @@ virtualisation.spiceUSBRedirection.enable = true;
     firefox.enable = false;
     dconf.enable = true;
     fuse.userAllowOther = true;
-
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -166,99 +176,164 @@ virtualisation.spiceUSBRedirection.enable = true;
     users.${username} = {
       isNormalUser = true;
       description = userDescription;
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [
         firefox
       ];
     };
   };
 
-programs.adb.enable = true;
+  programs.adb.enable = true;
 
-environment.systemPackages = with pkgs; [
-  # Text editors and IDEs
-  vim vscode bruno dbeaver-bin 
-  inputs.nixvim.packages.x86_64-linux.default
+  environment.systemPackages = with pkgs; [
+    # Text editors and IDEs
+    vim
+    ngrok
+    vscode
+    dbeaver-bin
+    inputs.nixvim.packages.x86_64-linux.default
 
-  deskreen
-  gparted
-  rclone
+    gparted
+    rclone
 
-  vivaldi
+    neofetch
 
-  neofetch
+    ente-auth
 
-  ente-auth
+    cinnamon.nemo-with-extensions
 
-  cinnamon.nemo-with-extensions
+    postman
 
-  jetbrains.idea-ultimate postman
-  
-  # Zen Browser from custom input
-  inputs.zen-browser.packages."${system}".default
+    # Zen Browser from custom input
+    inputs.zen-browser.packages."${system}".default
 
-  # Programming languages and tools
-  go lua python3 python3Packages.pip uv
-  nodePackages_latest.pnpm nodePackages_latest.yarn nodePackages_latest.nodejs
-  bun jdk maven gcc jdk8 cargo
+    # Programming languages and tools
+    go
+    lua
+    python3
+    python3Packages.pip
+    uv
+    nodePackages_latest.pnpm
+    nodePackages_latest.nodejs
+    bun
+    jdk
+    maven
+    gcc
+    jdk8
+    cargo
 
+    # Version control and development tools
+    git
+    gh
+    oxker
 
-  # Version control and development tools
-  git gh oxker
+    # Shell and terminal utilities
+    wtf
+    openssl
+    stow
+    wget
+    eza
+    starship
+    kitty
+    zoxide
+    fzf
+    progress
+    tree
 
+    unzip
+    ranger
 
-  # Shell and terminal utilities
-  wtf openssl stow wget eza starship kitty zoxide fzf progress tree warp-terminal
+    # System monitoring and management
+    htop
+    btop
+    lm_sensors
+    inxi
+    auto-cpufreq
+    nvtopPackages.nvidia
 
-  unzip ranger
+    # Network and internet tools
+    aria2
+    qbittorrent
 
-  # System monitoring and management
-  htop btop lm_sensors inxi auto-cpufreq nvtopPackages.nvidia
+    # Audio and video
+    pulseaudio
+    pavucontrol
+    ffmpeg
+    mpv
+    deadbeef-with-plugins
 
-  # Network and internet tools
-  aria2 qbittorrent
+    # Image and graphics
+    hyprpicker
+    swww
+    hyprlock
+    hyprpaper
 
-  # Audio and video
-  pulseaudio pavucontrol ffmpeg mpv deadbeef-with-plugins
+    # Productivity and office
+    obsidian
+    spacedrive
+    vesktop
 
-  # Image and graphics
-  hyprpicker swww hyprlock hyprpaper
+    # Browsers
+    firefox
+    google-chrome
 
-  # Productivity and office
-  obsidian spacedrive vesktop
+    # Gaming and entertainment
+    stremio
 
-  # Browsers
-  firefox google-chrome
+    # System utilities
+    libgcc
+    bc
+    kdePackages.dolphin
+    lxqt.lxqt-policykit
+    libnotify
+    v4l-utils
+    ydotool
+    pciutils
+    socat
+    cowsay
+    ripgrep
+    lshw
+    bat
+    pkg-config
+    brightnessctl
+    virt-viewer
+    swappy
+    appimage-run
+    yad
+    playerctl
+    nh
+    ansible
 
-  # Gaming and entertainment
-  stremio
+    # Wayland specific
+    hyprshot
+    hypridle
+    grim
+    slurp
+    waybar
+    dunst
+    wl-clipboard
+    swaynotificationcenter
 
-  # System utilities
-  libgcc bc kdePackages.dolphin lxqt.lxqt-policykit libnotify v4l-utils ydotool
-  pciutils socat cowsay ripgrep lshw bat pkg-config brightnessctl virt-viewer
-  swappy appimage-run yad playerctl nh ansible
+    # File systems
+    ntfs3g
+    os-prober
 
-  # Wayland specific
-  hyprshot hypridle grim slurp waybar dunst wl-clipboard swaynotificationcenter
+    # Clipboard managers
+    cliphist
 
-  # File systems
-  ntfs3g os-prober
+    # Fun and customization
+    #   cmatrix lolcat fastfetch onefetch microfetch
 
-  # Clipboard managers
-  cliphist
+    # Networking
+    networkmanagerapplet
 
-  # Fun and customization
-#   cmatrix lolcat fastfetch onefetch microfetch
+    # Music and streaming
+    youtube-music
+    spotify
 
-  # Networking
-  networkmanagerapplet
-
-  # Music and streaming
-  youtube-music spotify
-
-  # Miscellaneous
-  greetd.tuigreet
-];
+    # Miscellaneous
+    greetd.tuigreet
+  ];
 
   fonts.packages = with pkgs; [
     noto-fonts-emoji
@@ -288,16 +363,16 @@ environment.systemPackages = with pkgs; [
       enable = true;
 
       touchpad = {
-	naturalScrolling = true; 
+        naturalScrolling = true;
         additionalOptions = ''MatchIsTouchpad "on"'';
       };
     };
     xserver = {
       enable = true;
       xkb = {
-		layout = "us";
-		variant = "intl";
-       };
+        layout = "us";
+        variant = "intl";
+      };
     };
     greetd = {
       enable = true;
@@ -311,12 +386,12 @@ environment.systemPackages = with pkgs; [
     };
     logind = {
       extraConfig = ''
-      HandlePowerKey=suspend
-    '';
+        HandlePowerKey=suspend
+      '';
     };
     supergfxd.enable = true;
     cron = {
-      enable=true;
+      enable = true;
     };
     fstrim.enable = true;
     gvfs.enable = true;
@@ -324,7 +399,7 @@ environment.systemPackages = with pkgs; [
     flatpak.enable = true;
     printing = {
       enable = true;
-      drivers = [ pkgs.hplipWithPlugin ];
+      drivers = [pkgs.hplipWithPlugin];
     };
     auto-cpufreq.enable = true;
     gnome.gnome-keyring.enable = true;
@@ -354,7 +429,7 @@ environment.systemPackages = with pkgs; [
 
   systemd.services = {
     flatpak-repo = {
-      path = [ pkgs.flatpak ];
+      path = [pkgs.flatpak];
       script = "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
     };
   };
@@ -362,8 +437,8 @@ environment.systemPackages = with pkgs; [
   hardware = {
     sane = {
       enable = true;
-      extraBackends = [ pkgs.sane-airscan ];
-      disabledDefaultBackends = [ "escl" ];
+      extraBackends = [pkgs.sane-airscan];
+      disabledDefaultBackends = ["escl"];
     };
     logitech.wireless = {
       enable = true;
@@ -406,9 +481,9 @@ environment.systemPackages = with pkgs; [
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      experimental-features = ["nix-command" "flakes"];
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
@@ -420,7 +495,7 @@ environment.systemPackages = with pkgs; [
   programs.hyprland.enable = true;
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users.${username} = import ./home.nix;
     useGlobalPkgs = true;
     useUserPackages = true;
