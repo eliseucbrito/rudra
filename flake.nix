@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
 
     stylix.url = "github:danth/stylix";
 
@@ -11,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     nixvim.url = "github:daniloraisi/nixvim";
 
