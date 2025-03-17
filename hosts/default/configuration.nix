@@ -261,6 +261,8 @@ in {
   environment.systemPackages = with pkgs; [
     figma-linux
     gimp
+    lazydocker
+    lazygit
     notion-app-enhanced
 
     # Text editors and IDEs
