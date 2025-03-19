@@ -268,6 +268,8 @@ in {
     # Text editors and IDEs
     vim
     ngrok
+    zip
+    gitkraken
     vscode
     dbeaver-bin
     inputs.nixvim.packages.x86_64-linux.default
