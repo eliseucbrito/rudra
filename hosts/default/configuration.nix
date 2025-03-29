@@ -76,11 +76,21 @@ in {
           from = 8060;
           to = 8090;
         }
+        {
+          # KDE Connect
+          from = 1714;
+          to = 1764;
+        }
       ];
       allowedUDPPortRanges = [
         {
           from = 8060;
           to = 8090;
+        }
+        {
+          # KDE Connect
+          from = 1714;
+          to = 1764;
         }
       ];
     };
@@ -270,9 +280,13 @@ in {
     ngrok
     zip
     gitkraken
+    httpie-desktop
+    bruno
     vscode
     dbeaver-bin
     inputs.nixvim.packages.x86_64-linux.default
+    pipx
+    obs-studio
 
     gparted
     rclone
@@ -574,6 +588,7 @@ in {
   };
 
   programs.hyprland.enable = true;
+  programs.kdeconnect.enable = true;
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};

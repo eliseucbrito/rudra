@@ -127,7 +127,7 @@ eval "$(starship init zsh)"
 # Export Paths
 
 # pnpm
-export PNPM_HOME="/home/vasu/.local/share/pnpm"
+export PNPM_HOME="/home/ecb/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -143,7 +143,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)"
 
 # Turso
-export PATH="$PATH:/home/vasu/.turso"
+export PATH="$PATH:/home/ecb/.turso"
 
 alias zrc="nvim ~/rudra/dotfiles/.zshrc"
 alias hk="nvim ~/rudra/dotfiles/.config/hypr/keybindings.conf "
