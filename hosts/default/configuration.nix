@@ -1,7 +1,7 @@
 {
   config,
-  lib,
   pkgs,
+  unstable,
   inputs,
   options,
   ...
@@ -187,7 +187,7 @@ in {
     fuse.userAllowOther = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   users = {
     mutableUsers = true;
@@ -273,7 +273,11 @@ in {
     gimp
     lazydocker
     lazygit
-    notion-app-enhanced
+    daytona-bin
+
+    unstable.zed-editor
+    awscli2
+    terraform
 
     # Text editors and IDEs
     vim
@@ -296,7 +300,6 @@ in {
     ente-auth
 
     postman
-
     # Zen Browser from custom input
     inputs.zen-browser.packages."${system}".default
 
@@ -308,7 +311,8 @@ in {
     python3Packages.pip
     uv
     nodePackages_latest.pnpm
-    nodePackages_latest.nodejs
+    # nodePackages_latest.nodejs
+    nodejs_20
     bun
     jdk
     maven

@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   userName = "ecb";
   homeDirectory = "/home/${userName}";
   stateVersion = "24.05";
-in
-{
+in {
   home = {
     username = userName;
     homeDirectory = homeDirectory;
@@ -14,18 +15,19 @@ in
     file = {
       # Hyprland Config
       ".config/hypr".source = ../../dotfiles/.config/hypr;
-      
+
       # wlogout icons
       ".config/wlogout/icons".source = ../../config/wlogout;
-      
+
       # Top Level Files symlinks
       ".zshrc".source = ../../dotfiles/.zshrc;
       ".zshenv".source = ../../dotfiles/.zshenv;
       ".xinitrc".source = ../../dotfiles/.xinitrc;
       ".gitconfig".source = ../../dotfiles/.gitconfig;
       ".ideavimrc".source = ../../dotfiles/.ideavimrc;
-      ".nirc".source = ../../dotfiles/.nirc; ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
-      
+      ".nirc".source = ../../dotfiles/.nirc;
+      ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
+
       # Config directories
       ".config/alacritty".source = ../../dotfiles/.config/alacritty;
       ".config/dunst".source = ../../dotfiles/.config/dunst;
@@ -36,17 +38,20 @@ in
       ".config/waybar".source = ../../dotfiles/.config/waybar;
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
-      
+
       # Individual config files
       ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
       ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
       ".config/mimeapps.list".source = ../../dotfiles/.config/mimeapps.list;
     };
 
-    packages = [ 
+    packages = [
       pkgs.mpv
-      (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
+      pkgs.appimage-run
+      (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
     ];
+
+    # lib.attrValues myPackages
 
     sessionPath = [
       "$HOME/.local/bin"
@@ -102,4 +107,3 @@ in
 
   programs.home-manager.enable = true;
 }
-

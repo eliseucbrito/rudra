@@ -2,7 +2,8 @@
   description = "Unified flake for NixOS configuration and CUDA dev environment";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
 
     stylix.url = "github:danth/stylix";
@@ -34,7 +35,21 @@
   } @ inputs: {
     # System Configuration
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      system = "x86_64-linux";
+
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+
+      specialArgs = {
+        inherit inputs;
+        unstable = import inputs.unstable {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+      };
+
       modules = [
         ./hosts/default/configuration.nix
         inputs.stylix.nixosModules.stylix
