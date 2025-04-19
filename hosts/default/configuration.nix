@@ -275,6 +275,8 @@ in {
     lazygit
     daytona-bin
 
+    ghostty
+
     unstable.zed-editor
     awscli2
     terraform
@@ -362,12 +364,6 @@ in {
     mpv
     deadbeef-with-plugins
 
-    # Image and graphics
-    hyprpicker
-    swww
-    hyprlock
-    hyprpaper
-
     # Productivity and office
     obsidian
     spacedrive
@@ -403,14 +399,11 @@ in {
     ansible
 
     # Wayland specific
-    hyprshot
-    hypridle
     grim
     slurp
     waybar
     dunst
     wl-clipboard
-    swaynotificationcenter
 
     # File systems
     ntfs3g
@@ -447,12 +440,9 @@ in {
     wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
     ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal
     ];
   };
 
@@ -471,15 +461,16 @@ in {
         layout = "us";
         variant = "intl";
       };
-    };
-    greetd = {
-      enable = true;
-      vt = 3;
-      settings = {
-        default_session = {
-          user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
-        };
+      windowManager.awesome = {
+        enable = true;
+        luaModules = with pkgs.luaPackages; [
+          luarocks # is the package manager for Lua modules
+          luadbi-mysql # Database abstraction layer
+        ];
+      };
+      displayManager = {
+        sddm.enable = true;
+        defaultSession = "none+awesome";
       };
     };
     logind = {
@@ -591,7 +582,6 @@ in {
     optimise.automatic = true;
   };
 
-  programs.hyprland.enable = true;
   programs.kdeconnect.enable = true;
 
   home-manager = {
