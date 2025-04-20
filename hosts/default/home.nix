@@ -13,16 +13,13 @@ in {
     stateVersion = stateVersion;
 
     file = {
-      # Hyprland Config
-      ".config/hypr".source = ../../dotfiles/.config/hypr;
-
+      ".xinitrc".source = ../../dotfiles/.xinitrc;
       # wlogout icons
       ".config/wlogout/icons".source = ../../config/wlogout;
 
       # Top Level Files symlinks
       ".zshrc".source = ../../dotfiles/.zshrc;
       ".zshenv".source = ../../dotfiles/.zshenv;
-      ".xinitrc".source = ../../dotfiles/.xinitrc;
       ".gitconfig".source = ../../dotfiles/.gitconfig;
       ".ideavimrc".source = ../../dotfiles/.ideavimrc;
       ".nirc".source = ../../dotfiles/.nirc;
@@ -62,6 +59,7 @@ in {
   imports = [
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
+    ../../modules/awesome
   ];
 
   # Styling

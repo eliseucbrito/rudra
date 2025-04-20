@@ -1,1 +1,1 @@
-export XDG_MENU_PREFIX=plasma-
+exec awesome
