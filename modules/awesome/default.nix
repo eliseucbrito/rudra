@@ -1,4 +1,3 @@
-# modules/awesome/default.nix
 {pkgs, ...}: let
   awesome-git = pkgs.awesome.overrideAttrs (oa: {
     version = "git-0f950cb";
@@ -13,5 +12,9 @@ in {
   xsession.windowManager.awesome = {
     enable = true;
     package = awesome-git;
+    luaModules = with pkgs.luaPackages; [
+      luarocks
+      luadbi-mysql
+    ];
   };
 }
