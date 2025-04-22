@@ -14,6 +14,6 @@ cd "$USER_HOME" || { echo "Failed to cd to home directory"; exit 1; }
 cd "$RUDRA_DIR" || { echo "Failed to cd to $RUDRA_DIR"; exit 1; }
 
 # Rebuild NixOS configuration
-sudo nixos-rebuild switch --keep-going --flake .#default || { echo "Failed to rebuild NixOS configuration"; exit 1; }
+sudo nixos-rebuild switch --flake .#default || { echo "Failed to rebuild NixOS configuration"; exit 1; }
 
 echo "Script completed successfully."

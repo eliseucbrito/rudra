@@ -151,10 +151,9 @@ alias hc="nvim ~/rudra/dotfiles/.config/hypr/hyprland.conf "
 alias home="nvim ~/rudra/hosts/default/home.nix"
 alias cfg="nvim ~/rudra/hosts/default/configuration.nix"
 
-alias build="cd ~/rudra && sudo nixos-rebuild switch --flake .#default"
-
 ## Keybinds
 
 alias nr="npm run"
 alias dc="docker compose"
 alias fs="df -BG /home | aws 'NR==2 {print $4}"
+alias z="zeditor ."
