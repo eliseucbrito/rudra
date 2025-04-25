@@ -269,6 +269,9 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
+    unstable.temporal-cli
+    warp-terminal
+
     figma-linux
     gimp
     lazydocker
