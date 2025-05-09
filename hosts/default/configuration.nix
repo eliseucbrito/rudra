@@ -25,9 +25,9 @@ in {
   nixpkgs.overlays = [
     # inputs.nixpkgs-f2k.overlays.stdenvs
     # inputs.nixpkgs-f2k.overlays.compositors
-    # (final: prev: {
-    #   awesome = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-git;
-    # })
+    (final: prev: {
+      # awesome = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-git;
+    })
   ];
 
   boot = {
@@ -270,7 +270,8 @@ in {
 
   environment.systemPackages = with pkgs; [
     unstable.temporal-cli
-    warp-terminal
+    unstable.warp-terminal
+    jetbrains.idea-ultimate
 
     figma-linux
     gimp
@@ -287,7 +288,8 @@ in {
     ngrok
     zip
     gitkraken
-    httpie-desktop
+    bruno
+
     bruno
     vscode
     dbeaver-bin
