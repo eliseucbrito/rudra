@@ -271,6 +271,7 @@ in {
   environment.systemPackages = with pkgs; [
     unstable.temporal-cli
     unstable.warp-terminal
+    unstable.chatbox
     jetbrains.idea-ultimate
 
     figma-linux

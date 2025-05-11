@@ -63,3 +63,29 @@ nnoremap gcc :action CommentByLineComment<CR>
 nnoremap <leader>v :action SplitVertically<CR>
 
 nnoremap <leader>c :action CloseActiveTab<CR>
+
+
+" normal mode: seleciona a próxima ocorrência
+nnoremap <C-n> :action SelectNextOccurrence<CR>
+
+" visual mode: continua selecionando próximas ocorrências
+vnoremap <C-n> :action SelectNextOccurrence<CR>
+
+" insert mode: volta para normal, dispara a ação e retorna ao insert
+inoremap <C-n> <Esc>:action SelectNextOccurrence<CR>a
+
+
+" ─── Project View (sidebar) ───────────────────────────────────────────────
+" Leader+e abre/foca a janela de Project (Alt+1)
+nnoremap <Space>e :action ActivateProjectToolWindow<CR>
+
+" ─── New File ─────────────────────────────────────────────────────────────
+" Ctrl+Alt+N dispara o diálogo de “New File…”
+nnoremap <C-A-n> :action NewFile<CR>
+inoremap <C-A-n> <Esc>:action NewFile<CR>a
+vnoremap <C-A-n> :action NewFile<CR>
+
+" ─── Close Tab ────────────────────────────────────────────────────────────
+" Leader+c fecha a aba/editor ativo (Ctrl+F4)
+nnoremap <Space>c :action CloseContent<CR>
+

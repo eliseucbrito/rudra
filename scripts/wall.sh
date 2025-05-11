@@ -1,7 +1,8 @@
-{pkgs, ...}:
-pkgs.writeShellScriptBin "wallsetter" ''
+#!/bin/sh
+# Changes the wallpaper to a randomly chosen image in a given directory
+# at a set interval.
 
-  TIMEOUT=10
+  TIMEOUT=21600
 
   for pid in $(pidof -o %PPID -x wallsetter); do
   	kill $pid
