@@ -268,176 +268,178 @@ in {
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    unstable.temporal-cli
-    unstable.warp-terminal
-    unstable.chatbox
-    jetbrains.idea-ultimate
+  environment.systemPackages =
+    (with pkgs; [
+      unstable.temporal-cli
+      jetbrains.idea-ultimate
 
-    figma-linux
-    gimp
-    lazydocker
-    lazygit
-    daytona-bin
+      figma-linux
+      gimp
+      lazydocker
+      lazygit
+      daytona-bin
 
-    unstable.zed-editor
-    awscli2
-    terraform
+      unstable.zed-editor
+      awscli2
+      terraform
 
-    # Text editors and IDEs
-    vim
-    ngrok
-    zip
-    gitkraken
-    bruno
+      # Text editors and IDEs
+      vim
+      ngrok
+      zip
+      gitkraken
+      bruno
 
-    bruno
-    vscode
-    dbeaver-bin
-    inputs.nixvim.packages.x86_64-linux.default
-    pipx
-    obs-studio
+      bruno
+      vscode
+      dbeaver-bin
+      inputs.nixvim.packages.x86_64-linux.default
+      pipx
+      obs-studio
 
-    gparted
-    rclone
+      gparted
+      rclone
 
-    neofetch
+      neofetch
 
-    ente-auth
+      ente-auth
 
-    postman
-    # Zen Browser from custom input
-    inputs.zen-browser.packages."${system}".default
+      postman
+      # Zen Browser from custom input
+      inputs.zen-browser.packages."${system}".default
 
-    # Programming languages and tools
-    luarocks
-    go
-    lua
-    python3
-    python3Packages.pip
-    uv
-    nodePackages_latest.pnpm
-    # nodePackages_latest.nodejs
-    nodejs_20
-    bun
-    jdk
-    maven
-    gcc
-    jdk8
-    cargo
+      # Programming languages and tools
+      luarocks
+      go
+      lua
+      python3
+      python3Packages.pip
+      uv
+      nodePackages_latest.pnpm
+      # nodePackages_latest.nodejs
+      nodejs_20
+      bun
+      jdk
+      maven
+      gcc
+      jdk8
+      cargo
 
-    # Version control and development tools
-    git
-    gh
-    oxker
+      # Version control and development tools
+      git
+      gh
+      oxker
 
-    # Shell and terminal utilities
-    wtf
-    openssl
-    stow
-    wget
-    nautilus
-    eza
-    starship
-    kitty
-    zoxide
-    fzf
-    progress
-    tree
+      # Shell and terminal utilities
+      wtf
+      openssl
+      stow
+      wget
+      nautilus
+      eza
+      starship
+      kitty
+      zoxide
+      fzf
+      progress
+      tree
 
-    unzip
-    ranger
-    gearlever
+      unzip
+      ranger
+      gearlever
 
-    # System monitoring and management
-    htop
-    btop
-    lm_sensors
-    inxi
-    auto-cpufreq
-    nvtopPackages.nvidia
+      # System monitoring and management
+      htop
+      btop
+      lm_sensors
+      inxi
+      auto-cpufreq
+      nvtopPackages.nvidia
 
-    # Network and internet tools
-    aria2
-    qbittorrent
+      # Network and internet tools
+      aria2
+      qbittorrent
 
-    # Audio and video
-    pulseaudio
-    pavucontrol
-    ffmpeg
-    mpv
-    deadbeef-with-plugins
+      # Audio and video
+      pulseaudio
+      pavucontrol
+      ffmpeg
+      mpv
+      deadbeef-with-plugins
 
-    # Image and graphics
-    hyprpicker
-    swww
-    hyprlock
-    hyprpaper
+      # Image and graphics
+      hyprpicker
+      swww
+      hyprlock
+      hyprpaper
 
-    # Productivity and office
-    obsidian
-    spacedrive
-    vesktop
+      # Productivity and office
+      obsidian
+      spacedrive
+      vesktop
 
-    # Browsers
-    google-chrome
+      # Browsers
+      google-chrome
 
-    # Gaming and entertainment
-    stremio
+      # Gaming and entertainment
+      stremio
 
-    # System utilities
-    libgcc
-    bc
-    lxqt.lxqt-policykit
-    libnotify
-    v4l-utils
-    ydotool
-    pciutils
-    socat
-    cowsay
-    ripgrep
-    lshw
-    bat
-    pkg-config
-    brightnessctl
-    virt-viewer
-    swappy
-    appimage-run
-    yad
-    playerctl
-    nh
-    ansible
+      # System utilities
+      libgcc
+      bc
+      lxqt.lxqt-policykit
+      libnotify
+      v4l-utils
+      ydotool
+      pciutils
+      socat
+      cowsay
+      ripgrep
+      lshw
+      bat
+      pkg-config
+      brightnessctl
+      virt-viewer
+      swappy
+      appimage-run
+      yad
+      playerctl
+      nh
+      ansible
 
-    # Wayland specific
-    hyprshot
-    hypridle
-    grim
-    slurp
-    waybar
-    dunst
-    wl-clipboard
-    swaynotificationcenter
+      # Wayland specific
+      hyprshot
+      hypridle
+      grim
+      slurp
+      waybar
+      dunst
+      wl-clipboard
+      swaynotificationcenter
 
-    # File systems
-    ntfs3g
-    os-prober
+      # File systems
+      ntfs3g
+      os-prober
 
-    # Clipboard managers
-    cliphist
+      # Clipboard managers
+      cliphist
 
-    # Fun and customization
-    #   cmatrix lolcat fastfetch onefetch microfetch
+      # Fun and customization
+      #   cmatrix lolcat fastfetch onefetch microfetch
 
-    # Networking
-    networkmanagerapplet
+      # Networking
+      networkmanagerapplet
 
-    # Music and streaming
-    youtube-music
-    spotify
+      # Music and streaming
+      youtube-music
+      spotify
 
-    # Miscellaneous
-    greetd.tuigreet
-  ];
+      # Miscellaneous
+      greetd.tuigreet
+    ])
+    ++ (with unstable; [
+      warp-terminal
+    ]);
 
   fonts.packages = with pkgs; [
     noto-fonts-emoji

@@ -20,11 +20,11 @@
     hyprlux = {
       url = "github:amadejkastelic/Hyprlux";
     };
+    # Remova o input do chatbox daqui
   };
 
   nixConfig = {
     extra-substituters = ["https://cuda-maintainers.cachix.org"];
-
     extra-trusted-public-keys = ["cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="];
   };
 
@@ -40,6 +40,12 @@
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        overlays = [
+          # Defina o overlay diretamente aqui
+          (final: prev: {
+            chatbox = final.callPackage ./modules/chatbox/default.nix {};
+          })
+        ];
       };
 
       specialArgs = {
@@ -57,8 +63,9 @@
         inputs.hyprlux.nixosModules.default
 
         ({pkgs, ...}: {
-          environment.systemPackages = [
-            # Add any additional system packages here
+          environment.systemPackages = with pkgs; [
+            # Adicionar o Chatbox aos pacotes do sistema
+            chatbox
           ];
         })
       ];
