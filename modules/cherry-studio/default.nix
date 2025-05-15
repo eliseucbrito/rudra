@@ -9,7 +9,7 @@
 
   src = fetchurl {
     url = "https://github.com/CherryHQ/cherry-studio/releases/download/v1.2.10/Cherry-Studio-1.2.10-x86_64.AppImage";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    hash = "sha256-GPwuiXWDPCiVsnhdOmxWu4Xzs+PeiITWcAprfgVxVkU=";
   };
 
   appimageContents = appimageTools.extractType2 {inherit name src;};
