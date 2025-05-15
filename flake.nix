@@ -20,7 +20,6 @@
     hyprlux = {
       url = "github:amadejkastelic/Hyprlux";
     };
-    # Remova o input do chatbox daqui
   };
 
   nixConfig = {
@@ -41,9 +40,9 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
         overlays = [
-          # Defina o overlay diretamente aqui
           (final: prev: {
             chatbox = final.callPackage ./modules/chatbox/default.nix {};
+            cherry-studio = final.callPackage ./modules/cherry-studio/default.nix {};
           })
         ];
       };
@@ -64,7 +63,7 @@
 
         ({pkgs, ...}: {
           environment.systemPackages = with pkgs; [
-            # Adicionar o Chatbox aos pacotes do sistema
+            cherry-studio
             chatbox
           ];
         })
