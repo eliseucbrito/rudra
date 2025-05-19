@@ -42,7 +42,7 @@
         overlays = [
           (final: prev: {
             chatbox = final.callPackage ./modules/chatbox/default.nix {};
-            cherry-studio = final.callPackage ./modules/cherry-studio/default.nix {};
+            # cherry-studio = final.callPackage ./modules/cherry-studio/default.nix {};
           })
         ];
       };
@@ -63,7 +63,7 @@
 
         ({pkgs, ...}: {
           environment.systemPackages = with pkgs; [
-            cherry-studio
+            # cherry-studio
             chatbox
           ];
         })

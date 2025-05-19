@@ -11,6 +11,18 @@
   homeDirectory = "/home/${username}";
   hostName = "rudra";
   timeZone = "America/Recife";
+
+  dbeaver-xwayland = pkgs.dbeaver-bin.overrideAttrs (oldAttrs: {
+    nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [pkgs.makeWrapper];
+    postInstall =
+      oldAttrs.postInstall
+      or ""
+      + ''
+        wrapProgram $out/bin/dbeaver \
+          --set GDK_BACKEND x11 \
+          --set QT_QPA_PLATFORM xcb
+      '';
+  });
 in {
   imports = [
     ./hardware-configuration.nix
@@ -133,7 +145,7 @@ in {
       base0E = "f6c177";
       base0F = "524f67";
     };
-    image = ../../config/assets/wall.png;
+    image = ../../config/assets/back4.jpg;
     polarity = "dark";
     opacity.terminal = 0.8;
     cursor.package = pkgs.bibata-cursors;
@@ -271,6 +283,7 @@ in {
   environment.systemPackages =
     (with pkgs; [
       unstable.temporal-cli
+      unstable.cherry-studio
       jetbrains.idea-ultimate
 
       figma-linux
@@ -292,7 +305,7 @@ in {
 
       bruno
       vscode
-      dbeaver-bin
+      dbeaver-xwayland
       inputs.nixvim.packages.x86_64-linux.default
       pipx
       obs-studio
