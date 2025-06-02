@@ -39,12 +39,6 @@
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        overlays = [
-          (final: prev: {
-            chatbox = final.callPackage ./modules/chatbox/default.nix {};
-            # cherry-studio = final.callPackage ./modules/cherry-studio/default.nix {};
-          })
-        ];
       };
 
       specialArgs = {
@@ -60,13 +54,6 @@
         inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
         inputs.hyprlux.nixosModules.default
-
-        ({pkgs, ...}: {
-          environment.systemPackages = with pkgs; [
-            # cherry-studio
-            chatbox
-          ];
-        })
       ];
     };
 

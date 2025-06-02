@@ -283,7 +283,6 @@ in {
   environment.systemPackages =
     (with pkgs; [
       unstable.temporal-cli
-      unstable.cherry-studio
       jetbrains.idea-ultimate
 
       figma-linux
@@ -477,6 +476,17 @@ in {
     ];
   };
 
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+  };
+
+  hardware.nvidia = {
+    open = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+  };
+
   services = {
     libinput = {
       enable = true;
@@ -488,6 +498,7 @@ in {
     };
     xserver = {
       enable = true;
+      videoDrivers = ["nvidia"];
       xkb = {
         layout = "us";
         variant = "intl";

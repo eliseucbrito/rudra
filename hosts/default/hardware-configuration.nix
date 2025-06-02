@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -24,6 +24,11 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/var/lib/docker/overlay2/3d92a79b7cff17d398756637a5092eaf91b054f0df20f5be2636e96902da3757/merged" =
+    { device = "overlay";
+      fsType = "overlay";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/05bbc841-d96d-42a3-b3ff-d7967d685cb8"; }
     ];
@@ -34,12 +39,14 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.br-306f0691f75c.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-69839bc822f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.br-6f898b196769.useDHCP = lib.mkDefault true;
   # networking.interfaces.br-72501c25d55c.useDHCP = lib.mkDefault true;
   # networking.interfaces.br-7d590ebc1252.useDHCP = lib.mkDefault true;
   # networking.interfaces.br-bd6692eda39a.useDHCP = lib.mkDefault true;
   # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.vethe38fb1e.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
