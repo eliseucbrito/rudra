@@ -5,3 +5,5 @@
 	name = eliseucbrito
 [pull]
 	rebase = true
+[core]
+    editor = nvim

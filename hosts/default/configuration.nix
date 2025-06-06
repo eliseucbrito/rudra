@@ -302,6 +302,8 @@ in {
       gitkraken
       bruno
 
+      nest-cli
+      cz-cli
       bruno
       vscode
       dbeaver-xwayland
