@@ -4,9 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
-
-    stylix.url = "github:danth/stylix";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -16,10 +13,6 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     nixvim.url = "github:daniloraisi/nixvim";
-
-    hyprlux = {
-      url = "github:amadejkastelic/Hyprlux";
-    };
   };
 
   nixConfig = {
@@ -51,9 +44,7 @@
 
       modules = [
         ./hosts/default/configuration.nix
-        inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
-        inputs.hyprlux.nixosModules.default
       ];
     };
 
