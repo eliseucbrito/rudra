@@ -1,46 +1,55 @@
 #!/usr/bin/env bash
 
-# Prevent running the script directly as root
+# Impede a execução do script como root diretamente
 if [[ $EUID -eq 0 ]]; then
-  echo "This script must be run as a normal user (using sudo when necessary)."
-  exit 1
+   echo "Este script não deve ser executado como root. Use um usuário normal."
+   exit 1
 fi
 
-# Set variables for directories and files
-# Using 'getent passwd $SUDO_USER | cut -d: -f6' is more robust than 'eval echo ~$SUDO_USER'
-USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
+# A forma mais confiável de obter o usuário e seu home no contexto do script.
+# $USER é o usuário logado que executa o script.
+# $HOME é o diretório home desse usuário.
+CURRENT_USER="$USER"
+USER_HOME="$HOME"
 RUDRA_DIR="$USER_HOME/rudra"
 HARDWARE_CONFIG_DIR="$RUDRA_DIR/hosts/default"
 HARDWARE_CONFIG_FILE="$HARDWARE_CONFIG_DIR/hardware-configuration.nix"
 SYSTEM_HARDWARE_CONFIG="/etc/nixos/hardware-configuration.nix"
 
-# Ensure the target directory exists
-mkdir -p "$HARDWARE_CONFIG_DIR" || { echo "Failed to create directory $HARDWARE_CONFIG_DIR"; exit 1; }
+echo "Configurando para o usuário: $CURRENT_USER"
+echo "Diretório do projeto: $RUDRA_DIR"
 
-# Main logic for hardware-configuration.nix
+# Garante que o diretório de destino exista
+# Não precisa de sudo, pois está dentro do diretório home do usuário
+mkdir -p "$HARDWARE_CONFIG_DIR" || { echo "Falha ao criar o diretório $HARDWARE_CONFIG_DIR"; exit 1; }
+
+# Lógica principal para o hardware-configuration.nix
 if [ -f "$HARDWARE_CONFIG_FILE" ]; then
-   echo "The 'hardware-configuration.nix' file already exists in your directory. No action needed."
+    echo "O arquivo 'hardware-configuration.nix' já existe. Nenhuma ação necessária."
 else
-   echo "The 'hardware-configuration.nix' file was not found."
-   if [ -f "$SYSTEM_HARDWARE_CONFIG" ]; then
-      echo "Copying existing hardware configuration from $SYSTEM_HARDWARE_CONFIG..."
-      sudo cp "$SYSTEM_HARDWARE_CONFIG" "$HARDWARE_CONFIG_FILE" || { echo "Failed to copy hardware configuration."; exit 1; }
-      # Adjust permissions for the user who ran sudo
-      sudo chown $SUDO_USER:$SUDO_USER "$HARDWARE_CONFIG_FILE"
-   else
-      echo "No existing hardware configuration found. Generating a new one..."
-      sudo nixos-generate-config --show-hardware-config > "$HARDWARE_CONFIG_FILE" || { echo "Failed to generate new hardware configuration."; exit 1; }
-      # Adjust permissions
-      sudo chown $SUDO_USER:$SUDO_USER "$HARDWARE_CONFIG_FILE"
-      echo "New hardware configuration generated successfully."
-   fi
+    echo "O arquivo 'hardware-configuration.nix' não foi encontrado."
+    if [ -f "$SYSTEM_HARDWARE_CONFIG" ]; then
+        echo "Copiando a configuração de hardware existente de $SYSTEM_HARDWARE_CONFIG..."
+        # Usamos sudo aqui para ler o arquivo do sistema
+        sudo cp "$SYSTEM_HARDWARE_CONFIG" "$HARDWARE_CONFIG_FILE" || { echo "Falha ao copiar a configuração de hardware."; exit 1; }
+    else
+        echo "Nenhuma configuração de hardware existente encontrada. Gerando uma nova..."
+        # Usamos sudo aqui para gerar a configuração
+        sudo nixos-generate-config --show-hardware-config > "$HARDWARE_CONFIG_FILE" || { echo "Falha ao gerar a nova configuração de hardware."; exit 1; }
+        echo "Nova configuração de hardware gerada com sucesso."
+    fi
+    
+    # Ajusta as permissões para o usuário que executou o script, já que o arquivo foi criado via sudo
+    echo "Ajustando permissões do arquivo de configuração..."
+    sudo chown "$CURRENT_USER:$CURRENT_USER" "$HARDWARE_CONFIG_FILE"
 fi
 
-# Change to the flake directory
-cd "$RUDRA_DIR" || { echo "Failed to enter directory $RUDRA_DIR"; exit 1; }
+# Navega para o diretório do flake
+cd "$RUDRA_DIR" || { echo "Falha ao entrar no diretório $RUDRA_DIR"; exit 1; }
 
-# Rebuild NixOS configuration
-echo "Starting NixOS configuration rebuild..."
-sudo nixos-rebuild switch --flake .#default || { echo "Failed to rebuild NixOS configuration."; exit 1; }
+# Rebuild da configuração do NixOS
+echo "Iniciando o rebuild da configuração do NixOS..."
+# sudo é necessário para o rebuild
+sudo nixos-rebuild switch --flake .#default || { echo "Falha ao fazer o rebuild da configuração do NixOS."; exit 1; }
 
-echo "Script completed successfully."
+echo "Script concluído com sucesso."
