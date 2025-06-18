@@ -1,6 +1,6 @@
 # default apps
-export EDITOR="nixCats"
-export VISUAL="nixCats"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export TERMINAL="kitty"
 export BROWSER="zen"
 
@@ -13,12 +13,12 @@ export XDG_SCREENSHOTS_DIR="$HOME/Pictures/screenshots"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:$HOME/go/bin
 
- export _JAVA_AWT_WM_NOREPARENTING=1
-export XDG_SESSION_TYPE=wayland
-export XDG_CURRENT_DESKTOP=Hyprland
-export XDG_SESSION_DESKTOP=Hyprland
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export GBM_BACKEND=nvidia-drm
+#  export _JAVA_AWT_WM_NOREPARENTING=1
+# export XDG_SESSION_TYPE=wayland
+# export XDG_CURRENT_DESKTOP=Hyprland
+# export XDG_SESSION_DESKTOP=Hyprland
+# export __GLX_VENDOR_LIBRARY_NAME=nvidia
+# export GBM_BACKEND=nvidia-drm
 
 # set the localization
 export LC_ALL=en_US.UTF-8
