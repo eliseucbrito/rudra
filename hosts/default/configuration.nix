@@ -12,17 +12,6 @@
   hostName = "rudra";
   timeZone = "America/Recife";
 
-  dbeaver-xwayland = pkgs.dbeaver-bin.overrideAttrs (oldAttrs: {
-    nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [pkgs.makeWrapper];
-    postInstall =
-      oldAttrs.postInstall
-      or ""
-      + ''
-        wrapProgram $out/bin/dbeaver \
-          --set GDK_BACKEND x11 \
-          --set QT_QPA_PLATFORM xcb
-      '';
-  });
 in {
   imports = [
     ./hardware-configuration.nix
@@ -31,15 +20,6 @@ in {
     ../../modules/nvidia-prime-drivers.nix
     ../../modules/intel-drivers.nix
     inputs.home-manager.nixosModules.default
-    # inputs.hyprlux.nixosModules.default
-  ];
-
-  nixpkgs.overlays = [
-    # inputs.nixpkgs-f2k.overlays.stdenvs
-    # inputs.nixpkgs-f2k.overlays.compositors
-    (final: prev: {
-      # awesome = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-git;
-    })
   ];
 
   boot = {
@@ -113,63 +93,15 @@ in {
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
-  };
-
-  stylix = {
-    enable = true;
-    base16Scheme = {
-      base00 = "191724";
-      base01 = "1f1d2e";
-      base02 = "26233a";
-      base03 = "6e6a86";
-      base04 = "908caa";
-      base05 = "e0def4";
-      base06 = "e0def4";
-      base07 = "524f67";
-      base08 = "eb6f92";
-      base09 = "f6c177";
-      base0A = "ebbcba";
-      base0B = "31748f";
-      base0C = "9ccfd8";
-      base0D = "c4a7e7";
-      base0E = "f6c177";
-      base0F = "524f67";
-    };
-    image = ../../config/assets/back4.jpg;
-    polarity = "dark";
-    opacity.terminal = 0.8;
-    cursor.package = pkgs.bibata-cursors;
-    cursor.name = "Bibata-Modern-Ice";
-    cursor.size = 24;
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-        name = "JetBrainsMono Nerd Font Mono";
-      };
-      sansSerif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
-      };
-      serif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
-      };
-      sizes = {
-        applications = 12;
-        terminal = 15;
-        desktop = 11;
-        popups = 12;
-      };
+      LC_ADDRESS = "pt_BR.UTF-8";
+      LC_IDENTIFICATION = "pt_BR.UTF-8";
+      LC_MEASUREMENT = "pt_BR.UTF-8";
+      LC_MONETARY = "pt_BR.UTF-8";
+      LC_NAME = "pt_BR.UTF-8";
+      LC_NUMERIC = "pt_BR.UTF-8";
+      LC_PAPER = "pt_BR.UTF-8";
+      LC_TELEPHONE = "pt_BR.UTF-8";
+      LC_TIME = "pt_BR.UTF-8";
     };
   };
 
@@ -181,11 +113,8 @@ in {
   };
 
   programs.virt-manager.enable = true;
-
   users.groups.libvirtd.members = ["ecb"];
-
   virtualisation.libvirtd.enable = true;
-
   virtualisation.spiceUSBRedirection.enable = true;
 
   programs = {
@@ -199,7 +128,7 @@ in {
     fuse.userAllowOther = true;
   };
 
-  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   users = {
     mutableUsers = true;
@@ -212,8 +141,6 @@ in {
       ];
     };
   };
-
-  programs.adb.enable = true;
 
   xdg.mime.defaultApplications = {
     # Web and HTML
@@ -265,51 +192,26 @@ in {
     "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
   };
 
-  services.redshift = {
-    enable = true;
-
-    latitude = "-8.04";
-    longitude = "-34.94";
-    brightness = {
-      day = "1";
-      night = "1";
-    };
-    temperature = {
-      day = 2000;
-      night = 3700;
-    };
-  };
-
   environment.systemPackages =
     (with pkgs; [
-      unstable.temporal-cli
-      jetbrains.idea-ultimate
-
       figma-linux
       gimp
       lazydocker
       lazygit
-      daytona-bin
-
-      unstable.zed-editor
-      awscli2
-      terraform
 
       # Text editors and IDEs
       vim
       ngrok
       zip
       gitkraken
-      bruno
+      httpie-desktop
+      thunderbird
 
       nest-cli
       cz-cli
-      bruno
       vscode
-      dbeaver-xwayland
       inputs.nixvim.packages.x86_64-linux.default
       pipx
-      obs-studio
 
       gparted
       rclone
@@ -318,30 +220,17 @@ in {
 
       ente-auth
 
-      postman
-      # Zen Browser from custom input
-      inputs.zen-browser.packages."${system}".default
-
       # Programming languages and tools
       luarocks
-      go
       lua
-      python3
-      python3Packages.pip
-      uv
-      nodePackages_latest.pnpm
-      # nodePackages_latest.nodejs
       nodejs_20
-      bun
       jdk
       maven
       gcc
       jdk8
-      cargo
 
       # Version control and development tools
       git
-      gh
       oxker
 
       # Shell and terminal utilities
@@ -374,26 +263,13 @@ in {
       aria2
       qbittorrent
 
-      # Audio and video
-      pulseaudio
-      pavucontrol
-      ffmpeg
       mpv
-      deadbeef-with-plugins
-
-      # Image and graphics
-      hyprpicker
-      swww
-      hyprlock
-      hyprpaper
 
       # Productivity and office
       obsidian
-      spacedrive
       vesktop
 
-      # Browsers
-      google-chrome
+      responsively-app
 
       # Gaming and entertainment
       stremio
@@ -419,17 +295,6 @@ in {
       yad
       playerctl
       nh
-      ansible
-
-      # Wayland specific
-      hyprshot
-      hypridle
-      grim
-      slurp
-      waybar
-      dunst
-      wl-clipboard
-      swaynotificationcenter
 
       # File systems
       ntfs3g
@@ -437,12 +302,6 @@ in {
 
       # Clipboard managers
       cliphist
-
-      # Fun and customization
-      #   cmatrix lolcat fastfetch onefetch microfetch
-
-      # Networking
-      networkmanagerapplet
 
       # Music and streaming
       youtube-music
@@ -463,20 +322,6 @@ in {
     font-awesome
     material-icons
   ];
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal
-    ];
-  };
 
   # Enable OpenGL
   hardware.opengl = {
@@ -505,23 +350,25 @@ in {
         layout = "us";
         variant = "intl";
       };
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
     };
-    greetd = {
-      enable = true;
-      vt = 3;
-      settings = {
-        default_session = {
-          user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
-        };
-      };
-    };
-    logind = {
-      extraConfig = ''
-        HandlePowerKey=suspend
-      '';
-    };
-    supergfxd.enable = true;
+    # greetd = { 
+    #   enable = true;
+    #   vt = 3;
+    #   settings = {
+    #     default_session = {
+    #       user = username;
+    #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
+    #     };
+    #   };
+    # };
+    # logind = {
+    #   extraConfig = ''
+    #     HandlePowerKey=suspend
+    #   '';
+    # };
+    # supergfxd.enable = true;
     cron = {
       enable = true;
     };
@@ -531,9 +378,7 @@ in {
     flatpak.enable = true;
     printing = {
       enable = true;
-      drivers = [pkgs.hplipWithPlugin];
     };
-    auto-cpufreq.enable = true;
     gnome.gnome-keyring.enable = true;
     avahi = {
       enable = true;
@@ -607,25 +452,21 @@ in {
         })
       '';
     };
-    pam.services.swaylock.text = "auth include login";
   };
 
   nix = {
     settings = {
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 7d";
+      options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
   };
 
-  programs.hyprland.enable = true;
   programs.kdeconnect.enable = true;
 
   home-manager = {
@@ -636,5 +477,5 @@ in {
     backupFileExtension = "backup";
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }
