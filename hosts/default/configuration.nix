@@ -11,7 +11,6 @@
   homeDirectory = "/home/${username}";
   hostName = "rudra";
   timeZone = "America/Recife";
-
 in {
   imports = [
     ./hardware-configuration.nix
@@ -128,7 +127,7 @@ in {
     fuse.userAllowOther = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   users = {
     mutableUsers = true;
@@ -353,7 +352,7 @@ in {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
     };
-    # greetd = { 
+    # greetd = {
     #   enable = true;
     #   vt = 3;
     #   settings = {

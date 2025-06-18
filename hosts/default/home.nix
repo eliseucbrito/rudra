@@ -35,7 +35,7 @@ in {
     packages = [
       pkgs.mpv
       pkgs.appimage-run
-      (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
+      # (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
     ];
 
     sessionPath = [
@@ -45,8 +45,7 @@ in {
   };
 
   imports = [
-    ../../config/rofi/rofi.nix
-    ../../config/wlogout.nix
+    # ../../config/rofi/rofi.nix
   ];
 
   gtk = {
