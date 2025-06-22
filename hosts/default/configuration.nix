@@ -200,6 +200,7 @@ in {
 
       # Text editors and IDEs
       vim
+      rambox
       ngrok
       zip
       gitkraken
@@ -308,6 +309,21 @@ in {
 
       # Miscellaneous
       greetd.tuigreet
+      gnome-shell-extensions
+      gnomeExtensions.forge
+      gnomeExtensions.just-perfection
+      gnomeExtensions.caffeine
+      gnomeExtensions.transparent-top-bar
+      gnomeExtensions.gnome-40-ui-improvements
+      gnomeExtensions.panel-corners
+      gnomeExtensions.rounded-corners
+      gnomeExtensions.media-controls
+      gnomeExtensions.weather-oclock
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.clipboard-indicator
+      gnomeExtensions.memento-mori
+      gnomeExtensions.space-bar
+      gnomeExtensions.search-light
     ])
     ++ (with unstable; [
       warp-terminal
